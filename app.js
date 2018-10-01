@@ -8,17 +8,21 @@ const timeURL = "https://www.siriusxm.com/sxm_date_feed.tzi/";
 const songURL = "https://www.siriusxm.com/metadata/pdt/en-us/json/channels/thepulse/timestamp/";
 
 var songs = [];
+var songObj = new Object();
 var currentSongString = "";
 
+songObj.songs = songs;
 server.listen(3000);
 console.log('Server running on port 3000.');
 
 addNewSong();
-setInterval(addNewSong, 30000);
+setInterval(addNewSong, 60000);
 
 app.get('/json', function(req, res){
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
+  res.write(JSON.stringify(songObj));
+  res.end();
 });
 
 function addNewSong(){
@@ -31,9 +35,11 @@ function addSongToArray(newSong){
   if(currentSongString !== newSong){
     if(songs.length < 100){
       songs.push(newSong);
+      currentSongString = newSong;
     } else {
       songs.shift();
       songs.push(newSong);
+      currentSongString = newSong;
     }
   }
 }
@@ -50,7 +56,6 @@ function getCurrentSong(callback){
     var artist = reJSON.channelMetadataResponse.metaData.currentEvent.artists.name;
 
     var titleartist = song + " - " + artist;
-    console.log(titleartist);
     callback(titleartist);
   });
 }
