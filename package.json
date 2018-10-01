@@ -1,0 +1,24 @@
+{
+  "name": "asiriusdatabase",
+  "version": "1.0.0",
+  "description": "This Node.js application saves the last 100 songs of several SiriusXM radio stations.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "moment": "*",
+    "request": "*",
+    "express": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukasklinger/ASiriusDatabase.git"
+  },
+  "author": "Lukas Klinger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lukasklinger/ASiriusDatabase/issues"
+  },
+  "homepage": "https://github.com/lukasklinger/ASiriusDatabase#readme"
+}
