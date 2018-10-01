@@ -16,7 +16,7 @@ console.log('Server running on port 3000.');
 addNewSong();
 setInterval(addNewSong, 60000);
 
-app.get('/json', function(req, res){
+app.get('/thepulse', function(req, res){
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
 
@@ -59,10 +59,15 @@ function getCurrentSong(callback){
 
   request.get(currentSongURL, function(err, response, body){
     var reJSON = JSON.parse(body);
+
     var song = reJSON.channelMetadataResponse.metaData.currentEvent.song.name;
     var artist = reJSON.channelMetadataResponse.metaData.currentEvent.artists.name;
 
     var titleartist = song + " - " + artist;
     callback(titleartist);
+  });
+
+  process.on('uncaughtException', function(){
+    console.log("An uncaught exception happened.");
   });
 }
