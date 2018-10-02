@@ -13,19 +13,23 @@ function getCurrentTimeStamp(){
 }
 
 function updateTimestamp(){
-  var options = {
-    url: timeURL,
-    headers: {
-      'Cache-Control': 'no-cache'
-    }
-  };
+  timestamp = moment();
+  timestamp.utc();
+  currentTimestamp = timestamp;
 
-  request.get(options, function(err, response, body){
-    var timestamp = moment(body, "DDMMYYYYHHmmss");
-    timestamp.add(4, 'h');
-
-    saveTimestamp(timestamp);
-  });
+  // var options = {
+  //   url: timeURL,
+  //   headers: {
+  //     'Cache-Control': 'no-cache'
+  //   }
+  // };
+  //
+  // request.get(options, function(err, response, body){
+  //   var timestamp = moment(body, "DDMMYYYYHHmmss");
+  //   timestamp.add(4, 'h');
+  //
+  //   saveTimestamp(timestamp);
+  // });
 }
 
 function saveTimestamp(timestamp){
