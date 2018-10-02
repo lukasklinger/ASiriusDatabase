@@ -17,14 +17,12 @@ function getSongs(){
 }
 
 function addSongToArray(newSong){
-  console.log(newSong);
-  if(songs.length < 100){
+  console.log("hits1: " + newSong);
+  if(songs.size < 100){
     songs.add(newSong);
-    currentSongString = newSong;
   } else {
     songs.add(newSong);
-    removeOldSong;
-    currentSongString = newSong;
+    removeOldSong();
   }
 }
 
