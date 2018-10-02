@@ -2,11 +2,10 @@ const request = require('request');
 const moment = require('moment');
 
 var songs = new Set();
-var timeURL = "https://www.siriusxm.com/sxm_date_feed.tzi/";
 var baseURL = "https://www.siriusxm.com/metadata/pdt/en-us/json/channels/thepulse/timestamp/";
 
-function update(){
-  getCurrentSong(addSongToArray);
+function update(timestamp){
+  getCurrentSong(addSongToArray, timestamp);
 }
 
 function getSongs(){
@@ -31,11 +30,9 @@ function removeOldSong(){
   songs.delete(iterator.next().value);
 }
 
-function getCurrentSong(callback){
-  var timeInput = moment();
-  timeInput.subtract(2, 'h'); //will this work summer / winter time??
-  var timestamp = timeInput.format("MM-DD-HH:mm") + ":00";
-  var currentSongURL = baseURL + timestamp;
+function getCurrentSong(callback, timestamp){
+  var timestampFormatted = timestamp.format("MM-DD-HH:mm") + ":00";
+  var currentSongURL = baseURL + timestampFormatted;
 
   request.get(currentSongURL, function(err, response, body){
     var reJSON = JSON.parse(body);
